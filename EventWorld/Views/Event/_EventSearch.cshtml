@@ -1,0 +1,9 @@
+﻿@model IEnumerable<EventWorld.Models.Event>
+<div id="searchresults">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@item.Title, @item.Type, @item.Location</li>;
+        }
+    </ul>
+</div>

@@ -1,0 +1,22 @@
+﻿@model  EventWorld.Models.Event
+
+<div class="panel panel-primary">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Last Minute Deal on this Event:  @Model.Title</h3>
+    </div>
+    <div class="panel-body">
+
+        <div id="student-details">
+            <p>
+                <em>Event:</em>
+                @Model.Title
+                @Model.Description
+                @Model.StartDate
+                @Model.EndDate
+            </p>
+
+            @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.EventId }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+﻿@model IEnumerable<EventWorld.Models.Event>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id="lastminutedeal">
+    @Ajax.ActionLink("Click here to see our last minute deals!", "LastMinuteDeal", null, new AjaxOptions
+{
+    UpdateTargetId = "lastminutedeal",
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "GET"
+},
+new { @class = "btn btn-primary" })
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Search for our Events!</div>
+    <div class="panel-body">
+        @using (Ajax.BeginForm("EventSearch", "Event", new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "GET",
+            OnFailure = "searchFailed",
+            LoadingElementId = "ajax-loader",
+            UpdateTargetId = "searchresults"
+        }))
+        {
+            <input type="text" name="q" />
+            <input type="submit" value="search" />
+            <img id="ajax-loader"
+                 src="@Url.Content("http://www.bafcn.com/ajax-loader.gif")"
+                 style="display:none" />
+        }
+        <div id="searchresults"></div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxTickets)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableTickets)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Organizer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizerContactInfo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxTickets)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableTickets)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Organizer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizerContactInfo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.EventId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.EventId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.EventId })
+        </td>
+    </tr>
+    }
+
+</table>
+@section Scripts
+    {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/Apps/EventScript.js"></script>
+}

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<EventWorld.Models.EventType>
+
+@{
+    ViewBag.Title = "Browse";
+}
+
+<h2>Browse</h2>
+
+<div class="panel-body">
+    <h2>Browse the Types of Events we offer!</h2>
+
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                @Html.ActionLink(item.Type, "Index", new { id = item.EventTypeId })
+            </li>
+        }
+    </ul>
+
+</div>
